@@ -16,7 +16,6 @@
 		var select = parse.select("div.span4:has(br):matches(" & regex & ")");
 		var txt = "";
 		var uri = "";
-		var qrcode = "";
 		
 		
 		if(!select.isEmpty()){
