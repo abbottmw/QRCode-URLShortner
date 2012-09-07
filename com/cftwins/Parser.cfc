@@ -11,7 +11,7 @@
 	public any function getShortURL(string html){
 		
 		var Jsoup = CreateObject("java", "org.jsoup.Jsoup");
-		var regex = "^.*(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)$";
+		var regex = "^Shortened Link.*(https?://(cfml\.us)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)$";
 		var parse = Jsoup.parse(ARGUMENTS.html);
 		var select = parse.select("div.span4:has(br):matches(" & regex & ")");
 		var txt = "";
@@ -20,7 +20,7 @@
 		
 		if(!select.isEmpty()){
 		
-			txt = parse.select('div.span4').get(0).text();
+			txt = select.get(0).text();
 			uri = ReReplaceNoCase(txt,regex,"\1");
 			
 		}else{
