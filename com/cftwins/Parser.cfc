@@ -83,7 +83,7 @@
 		graphics.dispose();
 		
 	
-		ImageIO.write(cfCompatible.getCurrentImage(),'png',baos);
+		ImageIO.write(ImageGetBufferedImage(cfCompatible),'png',baos);
 		bytes = baos.toByteArray();
 		baos.close();
 		baos.reset();
