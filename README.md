@@ -5,6 +5,12 @@ This code will create a QR code from the http://cfml.us URL shortener.
 It parses the HTML returned after posting to the site.
 An example file html.txt is provided as test data.
 
+REQUIREMENTS
+-------------
+This code is written for Coldfusion 10 because it uses the new javaSettings to load Jars.  
+It can be easily made to work with ACF9/Railo
+by putting the jar files in the WEB-INF/lib directory of the web server.
+
 Example Usage
 --------------
 
