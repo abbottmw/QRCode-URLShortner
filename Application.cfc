@@ -5,14 +5,13 @@
 
 
     // Define our standard Application settings.
-    this.name = hash( getCurrentTemplatePath() );
+    this.name = hash( GetDirectoryFromPath(getCurrentTemplatePath()) );
     this.applicationTimeout = createTimeSpan( 0, 0, 1, 0 );
 
-    // Define our per-application Java library settings. Here, we
-    // are telling it to load JAR and CLASS files in the lib directory
-    // that is located in our application root. In this case, we are
-    // loading the JSoup 1.6.2 Class for parsing, traversing, and
-    // mutating HTML Documents.
+    /*
+    Use the new CF10 feature to load jars
+    CF9 will need to place the jar files in the WEB-INF/lib folder
+    */
     this.javaSettings = {
         loadPaths: [
             "./jars/"
