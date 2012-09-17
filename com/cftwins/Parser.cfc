@@ -73,7 +73,6 @@
 	
 		var cfCompatible = ImageNew("", w, h,"argb");
 		var graphics = ImageGetBufferedImage(cfCompatible).getGraphics();
-		var imageBytes = "";
 		var baos = createObject("java", "java.io.ByteArrayOutputStream").init();
 		var ImageIO = createObject("java","javax.imageio.ImageIO");
 		var bytes = '';
