@@ -1,45 +1,26 @@
-﻿component 
+component 
 {
 
 	
 	
-	Parser function init(){
+	QRCode function init(){
 		return this;	
 	}
 	
 	
-	public any function getShortURL(string html){
-		
-		var Jsoup = CreateObject("java", "org.jsoup.Jsoup");
-		var regex = "^Shortened Link.*(https?://(cfml\.us)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)$";
-		var parse = Jsoup.parse(ARGUMENTS.html);
-		var select = parse.select("div.span4:has(br):matches(" & regex & ")");
-		var txt = "";
-		var uri = "";
-		
-		
-		if(!select.isEmpty()){
-		
-			txt = select.get(0).text();
-			uri = ReReplaceNoCase(txt,regex,"\1");
-			
-		}else{
-			throw(message="No Data Found!");
-		}
-		
-		
-		return uri;
-	}
-	
 	
 	public any function createQRCodeFromURL(string uri){
 		
+		var shorturi = getShortURL(ARGUMENTS.uri);
+		return createQRCode(shorturi);
 		
+	}
+	
+	
+	private string function getShortURL(string uri){
 		
-		var httpService = new http(method='POST', url='http://cfml.us');
 		var result = '';
-		var html = '';
-
+		var httpService = new http(method='GET', url='http://cfml.us');
 		
 		if(!Len(trim(ARGUMENTS.uri))){
 			throw(message="No Data Found!");
@@ -47,19 +28,16 @@
 		
 		httpService.setCharset("utf-8");
 		httpService.addParam(name="User-Agent", type="header",value="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)");
-		httpService.addParam(name="longURL", type="formField",value="#ARGUMENTS.uri#");
-		httpService.addParam(name="Content-Type",type="header", value="application/x-www-form-urlencoded");
+		httpService.addParam(name="url", type="URL",value="#ARGUMENTS.uri#");
 		
-		result = httpService.send().getPrefix();
+		result = httpService.send().getPrefix().FileContent;
 		
-		html = getShortURL(result.Filecontent);
-
-		return createQRCode(html);
-		
+		return result;
 	}
 	
 	
-	public any function createQRCode(string data){
+
+	private any function createQRCode(string data){
 		
 		//QRCode creation using the iText library
 		

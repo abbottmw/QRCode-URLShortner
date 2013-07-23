@@ -1,11 +1,6 @@
 ﻿<cfscript>
-	Parser = new com.cftwins.Parser();
-	html = fileRead(ExpandPath('data/html.txt'));
-	uri = Parser.getShortURL(html);
-	qrcode = Parser.createQRCode(uri);
-	
-	//pass URL through cfml.us to get short url and create qrcode
-	//qrcode = Parser.createQRCodeFromURL('http://www.foxnews.com/tech/2012/09/03/5-easy-tricks-to-boost-your-home-wi-fi/?intcmp=features');
+	QRCodeURL= new com.cftwins.QRCode();
+	qrcode = QRCodeURL.createQRCodeFromURL('http://www.cftwins.com');
 </cfscript>
 
 <!---output to img tag--->
@@ -14,9 +9,7 @@
 </cfoutput>
 
 <!---write to browser--->
-<cfimage source="#qrcode#" action="writeToBrowser" format="jpg" >
+<cfimage source="#qrcode#" action="writeToBrowser" format="png" >
 
 <!---using cfcontent--->
 <!---<cfcontent reset="true" variable="#qrcode#" type="image/png">--->
-
-

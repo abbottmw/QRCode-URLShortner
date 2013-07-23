@@ -2,23 +2,21 @@ QR Code Generator for cfml.us
 ---
 
 This code will create a QR code from the http://cfml.us URL shortener.
-It parses the HTML returned after posting to the site.
-An example file html.txt is provided as test data.
+
 
 REQUIREMENTS
 -------------
-This code is written for Coldfusion 10 because it uses the new javaSettings to load Jars.  
-It can be easily made to work with ACF9/Railo
-by putting the jar files in the WEB-INF/lib directory of the web server.
+This code is tested on CF 9.0.2 and Railo 3.3
+This uses the IText library to generate the QR Codes, but this could be swapped out with other libraries like Zing Library with some modifications to the QR Code generation.
 
 Example Usage
 --------------
 
 ```cfm
   <cfscript>
-    Parser = new com.cftwins.Parser();
+    QRCodeURL = new com.cftwins.QRCode();
     //pass URL through cfml.us to get short url and create qrcode
-    qrcode = Parser.createQRCodeFromURL('http://www.cfml.us');
+    qrcode = QRCodeURL.createQRCodeFromURL('http://www.cfml.us');
   </cfscript>
   
   <!---output to img tag--->
