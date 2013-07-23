@@ -25,7 +25,7 @@ Example Usage
   </cfoutput>
   
   <!---write to browser--->
-  <cfimage source="#qrcode#" action="writeToBrowser" format="jpg" >
+  <cfimage source="#qrcode#" action="writeToBrowser" format="png" >
   
   <!---using cfcontent--->
   <!---<cfcontent reset="true" variable="#qrcode#" type="image/png">--->
